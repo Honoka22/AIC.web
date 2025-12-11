@@ -3,25 +3,248 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>My GitHub Pages Site</title>
+    <title>My Elegant Portfolio</title>
     <style>
-      body { font-family: "Helvetica Neue", Arial, sans-serif; margin: 0; background: #f4f4f8; color: #1f2933; }
-      main { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
-      .frame { background: white; padding: 3rem; border-radius: 1rem; box-shadow: 0 20px 45px rgba(15, 23, 42, 0.25); max-width: 640px; }
-      h1 { margin: 0 0 1rem; font-size: clamp(2rem, 3vw, 3rem); }
-      p { margin: 0 0 1rem; line-height: 1.5; }
-      a { color: #2563eb; text-decoration: none; font-weight: 600; }
-      footer { font-size: 0.8rem; color: #475569; margin-top: 1.5rem; }
+      :root {
+        color-scheme: light dark;
+        font-family: "Inter", "Noto Sans JP", system-ui, sans-serif;
+        text-rendering: optimizeLegibility;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: radial-gradient(circle at top, #ffeeff 0%, #fef0f8 40%, #0c0f2b 120%);
+        color: #0f172a;
+      }
+
+      main {
+        padding: 3rem 1.5rem 4rem;
+      }
+
+      .pill {
+        display: inline-flex;
+        padding: 0.35rem 1rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.05);
+        font-size: 0.85rem;
+        letter-spacing: 0.05em;
+      }
+
+      .hero {
+        position: relative;
+        max-width: 900px;
+        margin: 0 auto 3rem;
+        background: rgba(255, 255, 255, 0.85);
+        border-radius: 1.5rem;
+        padding: 3rem;
+        overflow: hidden;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 20px 60px rgba(15, 23, 42, 0.25);
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 1rem;
+        border-radius: 1rem;
+        background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.5), transparent 60%);
+        pointer-events: none;
+      }
+
+      .hero > * {
+        position: relative;
+      }
+
+      h1 {
+        margin: 0 0 1rem;
+        font-size: clamp(2.5rem, 4vw, 3.75rem);
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: #334155;
+      }
+
+      .lead {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin: 0 0 1.75rem;
+        color: #475569;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .primary,
+      .secondary {
+        border: none;
+        border-radius: 999px;
+        padding: 0.85rem 1.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .primary {
+        background: linear-gradient(135deg, #7c3aed, #2563eb);
+        color: white;
+        box-shadow: 0 15px 35px rgba(37, 99, 235, 0.35);
+      }
+
+      .secondary {
+        background: rgba(15, 23, 42, 0.06);
+        color: #0f172a;
+      }
+
+      .primary:hover,
+      .secondary:hover {
+        transform: translateY(-2px);
+      }
+
+      .grid {
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        margin-top: 2rem;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 1.25rem;
+        padding: 1.75rem;
+        box-shadow: 0 15px 40px rgba(15, 23, 42, 0.15);
+        border: 1px solid rgba(15, 23, 42, 0.05);
+      }
+
+      .card h3 {
+        margin: 0 0 0.75rem;
+        font-size: 1.1rem;
+        color: #111827;
+      }
+
+      .card p {
+        margin: 0;
+        color: #475569;
+      }
+
+      .stat {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #111827;
+      }
+
+      .timeline {
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        max-width: 760px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .step {
+        background: rgba(255, 255, 255, 0.9);
+        border-left: 4px solid #2563eb;
+        padding: 1rem 1.25rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 3.5rem;
+        color: #94a3b8;
+        font-size: 0.85rem;
+      }
+
+      @media (max-width: 640px) {
+        .hero {
+          padding: 2.2rem;
+        }
+
+        .actions {
+          flex-direction: column;
+        }
+
+        .card {
+          border-left: none;
+        }
+      }
     </style>
   </head>
   <body>
     <main>
-      <div class="frame">
-        <h1>Welcome to my GitHub Pages site</h1>
-        <p>このページはGitHub Pagesでホストされています。シンプルな自己紹介やプロジェクト紹介に使えます。</p>
-        <p>必要に応じて<a href="mailto:hello@example.com">お問い合わせ</a>ください。</p>
-        <footer>Ⓒ 2024 Your Name</footer>
-      </div>
+      <section class="hero">
+        <div class="pill">Portfolio &amp; Story</div>
+        <h1>Crafting elegant web experiences with intent and clarity.</h1>
+        <p class="lead">
+          日々、プロダクトの顔となるWebサイトやインタラクションをデザイン &amp; コーディングしています。今の技術だけでなく、未来を見据えた体験の設計を得意としています。
+        </p>
+        <div class="actions">
+          <button class="primary">制作実績を見る</button>
+          <button class="secondary">相談する</button>
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h3>アイデアの具現化</h3>
+          <p>スタートアップから個人プロジェクトまで、コンセプトから視覚化を経てプロダクト出荷まで伴走します。</p>
+        </article>
+        <article class="card">
+          <h3>フロントエンド開発</h3>
+          <p>React/Vueに加え、TailwindやMotionで直感的かつ高品質なUIを実装し、UXを損なわないパフォーマンス維持をしてきました。</p>
+        </article>
+        <article class="card">
+          <h3>クリエイティブパートナー</h3>
+          <p>チームやクライアントと密に連携し、言語を超えた共創を何より重視したスタイルです。</p>
+        </article>
+      </section>
+
+      <section class="timeline">
+        <div class="step">
+          <p class="stat">12</p>
+          <h3>業界リードのチームでの経験</h3>
+          <p>国内外のブランドと連携し、大規模なサービスの設計〜実装を担い、UI/UXのベストプラクティスを磨いてきました。</p>
+        </div>
+        <div class="step">
+          <p class="stat">120+</p>
+          <h3>制作したプロジェクト</h3>
+          <p>コーポレートサイトからプロダクト管理ツールまで幅広く、デザインシステムとコンポーネント設計を運用しています。</p>
+        </div>
+        <div class="step">
+          <p class="stat">Worldwide</p>
+          <h3>クライアント・パートナー</h3>
+          <p>東京を拠点にしつつ、リモートで世界各地のチームと協力。プロジェクトの円滑な進行を支えるコミュニケーションを心がけています。</p>
+        </div>
+      </section>
+
+      <section class="grid" style="margin-top: 3rem;">
+        <article class="card">
+          <h3>Tell Me More</h3>
+          <p>新規サイト立ち上げ、ブランド刷新、サービスのスケーリングなど、あらゆるステージでクリエイティブパートナーをお探しならこちらから。</p>
+        </article>
+        <article class="card">
+          <h3>Contact</h3>
+          <p><strong>mail@example.com</strong><br />お気軽にご相談ください。週内のご返信を心がけています。</p>
+        </article>
+      </section>
+
+      <footer>Ⓒ 2024 Your Name — Crafted with care in Tokyo.</footer>
     </main>
   </body>
 </html>
