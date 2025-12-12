@@ -3,13 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>今月のドラマおすすめガイド</title>
+    <title>あなたのための映画・ドラマ推薦ページ</title>
     <style>
       :root {
-        font-family: "Inter", "Noto Sans JP", system-ui, sans-serif;
-        text-rendering: optimizeLegibility;
-        color: #f8fafc;
-        background-color: #050b16;
+        font-family: "Noto Sans JP", "Inter", system-ui, sans-serif;
+        background-color: #020617;
+        color: #e2e8f0;
       }
 
       * {
@@ -19,147 +18,134 @@
       body {
         margin: 0;
         min-height: 100vh;
-        background: radial-gradient(circle at top, rgba(59, 130, 246, 0.25), transparent 45%),
-          radial-gradient(circle at 20% 20%, rgba(236, 72, 153, 0.2), transparent 50%), #050b16;
-        color: inherit;
+        background: radial-gradient(circle at top, rgba(59, 130, 246, 0.2), transparent 45%),
+          linear-gradient(180deg, #020617 0%, #060b1d 60%, #0f172a 100%);
       }
 
       main {
-        padding: 3rem 1.5rem 4rem;
+        padding: 2.5rem 1.25rem 4rem;
         max-width: 1100px;
         margin: 0 auto;
       }
 
       .hero {
-        background: linear-gradient(150deg, rgba(15, 23, 42, 0.85), rgba(37, 99, 235, 0.3));
+        text-align: center;
+        padding: 3rem 2rem;
         border-radius: 1.5rem;
-        padding: 3rem;
+        background: rgba(15, 23, 42, 0.85);
+        border: 1px solid rgba(148, 163, 184, 0.4);
         box-shadow: 0 25px 60px rgba(2, 6, 23, 0.7);
-        position: relative;
-        overflow: hidden;
       }
 
-      .hero::after {
-        content: "";
-        position: absolute;
-        inset: 1rem;
-        border-radius: 1rem;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        pointer-events: none;
+      .hero h1 {
+        margin: 0.5rem 0;
+        font-size: clamp(2.5rem, 4vw, 3.4rem);
       }
 
-      .pill {
-        display: inline-flex;
-        padding: 0.35rem 1rem;
-        border-radius: 999px;
-        background: rgba(248, 250, 252, 0.9);
-        color: #0f172a;
-        font-size: 0.85rem;
-        letter-spacing: 0.2em;
-      }
-
-      h1 {
-        margin: 1.5rem 0 0.5rem;
-        font-size: clamp(2.75rem, 4vw, 3.75rem);
-        line-height: 1.2;
-      }
-
-      p.lead {
-        margin: 0 0 1.5rem;
-        max-width: 620px;
+      .hero p {
+        margin: 0.5rem auto 0;
+        max-width: 640px;
         color: #cbd5f5;
-        font-size: 1.1rem;
         line-height: 1.7;
       }
 
+      .tag {
+        display: inline-flex;
+        padding: 0.35rem 0.9rem;
+        border-radius: 999px;
+        font-size: 0.9rem;
+        letter-spacing: 0.2em;
+        background: rgba(59, 130, 246, 0.25);
+        border: 1px solid rgba(59, 130, 246, 0.5);
+      }
+
+      .intro {
+        margin-top: 2.5rem;
+        background: rgba(2, 6, 23, 0.7);
+        border-radius: 1rem;
+        padding: 2rem;
+        border: 1px solid rgba(148, 163, 184, 0.3);
+      }
+
+      .intro h2 {
+        margin: 0 0 0.75rem;
+        font-size: 1.6rem;
+        color: #e0e7ff;
+      }
+
+      .intro p {
+        margin: 0;
+        line-height: 1.8;
+        color: #cbd5f5;
+      }
+
       .grid {
+        margin-top: 3rem;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
         gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       }
 
       .card {
+        position: relative;
         padding: 1.75rem;
         border-radius: 1.25rem;
-        background: rgba(15, 23, 42, 0.8);
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(59, 130, 246, 0.2));
         border: 1px solid rgba(99, 102, 241, 0.4);
-        box-shadow: 0 15px 40px rgba(2, 6, 23, 0.75);
-        position: relative;
         overflow: hidden;
-      }
-
-      .card::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: inherit;
-        background: linear-gradient(180deg, rgba(37, 99, 235, 0.3), transparent 65%);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        pointer-events: none;
-      }
-
-      .card:hover::after {
-        opacity: 1;
+        min-height: 260px;
       }
 
       .card h3 {
-        margin: 0 0 0.35rem;
-        font-size: 1.35rem;
-        color: #e0e7ff;
+        margin: 0 0 0.25rem;
+        font-size: 1.5rem;
       }
 
       .card p {
         margin: 0.35rem 0;
+        line-height: 1.65;
         color: #cbd5f5;
-        line-height: 1.6;
       }
 
       .meta {
+        margin-top: 1rem;
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem;
-        margin-top: 1rem;
         font-size: 0.9rem;
         color: #fef3c7;
       }
 
       .meta span {
-        padding: 0.25rem 0.75rem;
+        padding: 0.2rem 0.85rem;
         border-radius: 999px;
-        background: rgba(244, 63, 94, 0.15);
-        border: 1px solid rgba(244, 63, 94, 0.5);
+        border: 1px solid rgba(248, 113, 113, 0.6);
+        background: rgba(248, 113, 113, 0.15);
       }
 
-      .tagline {
-        font-weight: 600;
-        color: #38bdf8;
-      }
-
-      .highlight {
-        margin-top: 3rem;
-        padding: 2rem;
-        border-radius: 1.5rem;
-        background: rgba(15, 23, 42, 0.9);
-        border: 1px solid rgba(59, 130, 246, 0.4);
-        box-shadow: 0 20px 45px rgba(2, 6, 23, 0.8);
-      }
-
-      .highlight h2 {
-        margin: 0 0 1rem;
+      .section-title {
+        margin-top: 4rem;
         font-size: 1.8rem;
         color: #e2e8f0;
       }
 
-      .highlight ul {
+      .tips {
+        margin-top: 1.5rem;
+        padding: 1.75rem;
+        border-radius: 1.25rem;
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        background: rgba(15, 23, 42, 0.7);
+        line-height: 1.7;
+        color: #cbd5f5;
+      }
+
+      .tips ul {
         margin: 0;
         padding-left: 1.25rem;
-        color: #cbd5f5;
-        line-height: 1.7;
       }
 
       footer {
-        margin-top: 3.5rem;
+        margin-top: 4rem;
         text-align: center;
         color: #94a3b8;
         font-size: 0.85rem;
@@ -167,11 +153,11 @@
 
       @media (max-width: 640px) {
         .hero {
-          padding: 2.2rem;
+          padding: 2.5rem 1.5rem;
         }
 
-        .card {
-          padding: 1.5rem;
+        .grid {
+          grid-template-columns: 1fr;
         }
       }
     </style>
@@ -179,62 +165,71 @@
   <body>
     <main>
       <section class="hero">
-        <span class="pill">今月のドラマガイド</span>
-        <h1>心に残る秋の夜に寄り添う、3つの物語。</h1>
-        <p class="lead">
-          高揚できるロマンス、予想を裏切るサスペンス、そして温かな人間模様。各局の注目作を深掘りしながら、次に観るべき1本が見つかるよう編集部のおすすめをまとめました。
+        <span class="tag">Recommender</span>
+        <h1>映画・ドラマの余韻を一緒に味わいませんか？</h1>
+        <p>
+          シリーズの余白や登場人物の心情を追いかけるのが好きな私が、今いちばん薦めたい作品を国ごとに選びました。集中して観る時間が取れない日にも、短い語りで次の1本を想像してください。
+        </p>
+      </section>
+
+      <section class="intro">
+        <h2>私の自己紹介</h2>
+        <p>
+          映画祭や配信サービスの新作情報を追いかけながら、ストーリーとシーンの細部に注目する視点を大切にしています。作品の魅力を仲間に伝えるために、視聴後の感想をノートにまとめるクセがあり、そこから生まれたおすすめリストをこのページでも共有しています。
         </p>
       </section>
 
       <section class="grid">
         <article class="card">
-          <h3>夜に煌めく誓い</h3>
+          <h3>ワンピース（実写版）</h3>
           <p>
-            小さな港町を舞台に、心を閉ざした凛子と消えた歌声の作曲家が再会。音楽と共に過去の謎が解き明かされていくラブミステリー。
+            アメリカの制作陣が海賊の冒険に新しいリアリズムを注入。原作の熱量を再現しつつ、ビジュアルの質感やキャラクターの距離感に現代ドラマらしい厚みがあります。
           </p>
-          <p class="tagline">Streaming: 毎週火曜 22:00 | NHK総合</p>
+          <p class="tagline">冒険×友情 | 海外ドラマ | 配信：Netflix</p>
           <div class="meta">
-            <span>ヒーリング系</span>
-            <span>全8話</span>
-            <span>脚本：山本恵里</span>
+            <span>アクション満載</span>
+            <span>配役のバランス◎</span>
+            <span>原作ファンにもおすすめ</span>
           </div>
         </article>
+
         <article class="card">
-          <h3>白昼の微光</h3>
+          <h3>マイデーモン</h3>
           <p>
-            大学院生の視点で描く法医学サスペンス。証拠の向こう側にある “真実の色” を追うたびに、事件のディテールと登場人物の心情が交錯する。
+            韓国ドラマらしい感情の揺さぶりとファンタジックな世界観を併せ持つ作品。「悪魔」と契約したヒロインが私欲と向き合うなかで、優しさと自立が丁寧に描かれます。
           </p>
-          <p class="tagline">Broadcast: 毎週金曜 23:15 | カンテレ</p>
+          <p class="tagline">ロマンス×ファンタジー | 韓国ドラマ | 配信：Netflix</p>
           <div class="meta">
-            <span>サスペンス</span>
-            <span>新作</span>
-            <span>主演：中田雅人</span>
+            <span>感情の波が心地よい</span>
+            <span>OSTが染みる</span>
+            <span>スローながら癖になる</span>
           </div>
         </article>
+
         <article class="card">
-          <h3>灯りをつないで</h3>
+          <h3>不適切にもほどがある</h3>
           <p>
-            郊外の古民家で偶然出会った3世代の姉妹たちが、手作りの灯りを通じて再び家族の絆を取り戻すヒューマンドラマ。
+            日本の地上波枠で放送される、ブラックユーモアとサスペンスが交差する傑作。特殊な状況に置かれた登場人物たちの心理戦や、日常のタッチの強弱が小気味よく響きます。
           </p>
-          <p class="tagline">Streaming: Amazon Prime Video | 毎週水曜 配信</p>
+          <p class="tagline">ブラックコメディ | 日本のドラマ | 放送：TBS</p>
           <div class="meta">
-            <span>家族愛</span>
-            <span>心温まる</span>
-            <span>監督：堀田碧</span>
+            <span>台詞回しが秀逸</span>
+            <span>目が離せない展開</span>
+            <span>今季の話題作</span>
           </div>
         </article>
       </section>
 
-      <section class="highlight">
-        <h2>今月の注目ポイント</h2>
+      <h2 class="section-title">いつ観る？視聴のヒント</h2>
+      <div class="tips">
         <ul>
-          <li>リピート必至の劇中歌や背景の描写をチェック。毎週の更新が待ち遠しくなるように、音楽と映像美が融合した演出が見どころです。</li>
-          <li>一話完結ではなく、長期戦で感情のグラデーションを楽しめる配信スケジュール。週の中盤にドラマを観て、次の週に向けて想像を広げましょう。</li>
-          <li>ポッドキャスト「ドラマとコーヒー」では、ライブ配信で各回の見どころや伏線を解説。感想をつぶやくハッシュタグ「#今月の灯り」で参加可能です。</li>
+          <li>冒頭は一気に流し見せず、演出やロケ地のカットをじっくり眺めると新たな発見があります。</li>
+          <li>サブキャラの小さな仕草にも注目すると、作品のテーマがより深く染み渡ります。</li>
+          <li>観終えたらお気に入りの一場面を手帳に書き起こし、次の推しポイントへつなげてください。</li>
         </ul>
-      </section>
+      </div>
 
-      <footer>Ⓒ 2024 Drama Picks — 制作：AIC編集部</footer>
+      <footer>Ⓒ 2024 AIC Recommender — 映画とドラマを愛するひととき</footer>
     </main>
   </body>
 </html>
