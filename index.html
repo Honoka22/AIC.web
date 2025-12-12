@@ -3,12 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>My Elegant Portfolio</title>
+    <title>今月のドラマおすすめガイド</title>
     <style>
       :root {
-        color-scheme: light dark;
         font-family: "Inter", "Noto Sans JP", system-ui, sans-serif;
         text-rendering: optimizeLegibility;
+        color: #f8fafc;
+        background-color: #050b16;
       }
 
       * {
@@ -18,155 +19,148 @@
       body {
         margin: 0;
         min-height: 100vh;
-        background: radial-gradient(circle at top, #ffeeff 0%, #fef0f8 40%, #0c0f2b 120%);
-        color: #0f172a;
+        background: radial-gradient(circle at top, rgba(59, 130, 246, 0.25), transparent 45%),
+          radial-gradient(circle at 20% 20%, rgba(236, 72, 153, 0.2), transparent 50%), #050b16;
+        color: inherit;
       }
 
       main {
         padding: 3rem 1.5rem 4rem;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      .hero {
+        background: linear-gradient(150deg, rgba(15, 23, 42, 0.85), rgba(37, 99, 235, 0.3));
+        border-radius: 1.5rem;
+        padding: 3rem;
+        box-shadow: 0 25px 60px rgba(2, 6, 23, 0.7);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 1rem;
+        border-radius: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        pointer-events: none;
       }
 
       .pill {
         display: inline-flex;
         padding: 0.35rem 1rem;
         border-radius: 999px;
-        background: rgba(255, 255, 255, 0.9);
-        box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.05);
+        background: rgba(248, 250, 252, 0.9);
+        color: #0f172a;
         font-size: 0.85rem;
-        letter-spacing: 0.05em;
-      }
-
-      .hero {
-        position: relative;
-        max-width: 900px;
-        margin: 0 auto 3rem;
-        background: rgba(255, 255, 255, 0.85);
-        border-radius: 1.5rem;
-        padding: 3rem;
-        overflow: hidden;
-        backdrop-filter: blur(12px);
-        box-shadow: 0 20px 60px rgba(15, 23, 42, 0.25);
-      }
-
-      .hero::before {
-        content: "";
-        position: absolute;
-        inset: 1rem;
-        border-radius: 1rem;
-        background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.5), transparent 60%);
-        pointer-events: none;
-      }
-
-      .hero > * {
-        position: relative;
+        letter-spacing: 0.2em;
       }
 
       h1 {
-        margin: 0 0 1rem;
-        font-size: clamp(2.5rem, 4vw, 3.75rem);
-        line-height: 1.1;
-        letter-spacing: -0.02em;
+        margin: 1.5rem 0 0.5rem;
+        font-size: clamp(2.75rem, 4vw, 3.75rem);
+        line-height: 1.2;
       }
 
-      h2 {
-        margin: 0;
-        font-size: 1.5rem;
-        font-weight: 500;
-        color: #334155;
-      }
-
-      .lead {
-        font-size: 1rem;
-        line-height: 1.6;
-        margin: 0 0 1.75rem;
-        color: #475569;
-      }
-
-      .actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-      }
-
-      .primary,
-      .secondary {
-        border: none;
-        border-radius: 999px;
-        padding: 0.85rem 1.8rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-      }
-
-      .primary {
-        background: linear-gradient(135deg, #7c3aed, #2563eb);
-        color: white;
-        box-shadow: 0 15px 35px rgba(37, 99, 235, 0.35);
-      }
-
-      .secondary {
-        background: rgba(15, 23, 42, 0.06);
-        color: #0f172a;
-      }
-
-      .primary:hover,
-      .secondary:hover {
-        transform: translateY(-2px);
+      p.lead {
+        margin: 0 0 1.5rem;
+        max-width: 620px;
+        color: #cbd5f5;
+        font-size: 1.1rem;
+        line-height: 1.7;
       }
 
       .grid {
         display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
         gap: 1.5rem;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        margin-top: 2rem;
       }
 
       .card {
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 1.25rem;
         padding: 1.75rem;
-        box-shadow: 0 15px 40px rgba(15, 23, 42, 0.15);
-        border: 1px solid rgba(15, 23, 42, 0.05);
+        border-radius: 1.25rem;
+        background: rgba(15, 23, 42, 0.8);
+        border: 1px solid rgba(99, 102, 241, 0.4);
+        box-shadow: 0 15px 40px rgba(2, 6, 23, 0.75);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(180deg, rgba(37, 99, 235, 0.3), transparent 65%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+      }
+
+      .card:hover::after {
+        opacity: 1;
       }
 
       .card h3 {
-        margin: 0 0 0.75rem;
-        font-size: 1.1rem;
-        color: #111827;
+        margin: 0 0 0.35rem;
+        font-size: 1.35rem;
+        color: #e0e7ff;
       }
 
       .card p {
-        margin: 0;
-        color: #475569;
+        margin: 0.35rem 0;
+        color: #cbd5f5;
+        line-height: 1.6;
       }
 
-      .stat {
-        font-size: 2rem;
-        font-weight: 600;
-        color: #111827;
-      }
-
-      .timeline {
-        margin-top: 3rem;
+      .meta {
         display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        max-width: 760px;
-        margin-left: auto;
-        margin-right: auto;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: #fef3c7;
       }
 
-      .step {
-        background: rgba(255, 255, 255, 0.9);
-        border-left: 4px solid #2563eb;
-        padding: 1rem 1.25rem;
-        border-radius: 0.75rem;
-        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+      .meta span {
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(244, 63, 94, 0.15);
+        border: 1px solid rgba(244, 63, 94, 0.5);
+      }
+
+      .tagline {
+        font-weight: 600;
+        color: #38bdf8;
+      }
+
+      .highlight {
+        margin-top: 3rem;
+        padding: 2rem;
+        border-radius: 1.5rem;
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(59, 130, 246, 0.4);
+        box-shadow: 0 20px 45px rgba(2, 6, 23, 0.8);
+      }
+
+      .highlight h2 {
+        margin: 0 0 1rem;
+        font-size: 1.8rem;
+        color: #e2e8f0;
+      }
+
+      .highlight ul {
+        margin: 0;
+        padding-left: 1.25rem;
+        color: #cbd5f5;
+        line-height: 1.7;
       }
 
       footer {
-        text-align: center;
         margin-top: 3.5rem;
+        text-align: center;
         color: #94a3b8;
         font-size: 0.85rem;
       }
@@ -176,12 +170,8 @@
           padding: 2.2rem;
         }
 
-        .actions {
-          flex-direction: column;
-        }
-
         .card {
-          border-left: none;
+          padding: 1.5rem;
         }
       }
     </style>
@@ -189,62 +179,62 @@
   <body>
     <main>
       <section class="hero">
-        <div class="pill">Portfolio &amp; Story</div>
-        <h1>Crafting elegant web experiences with intent and clarity.</h1>
+        <span class="pill">今月のドラマガイド</span>
+        <h1>心に残る秋の夜に寄り添う、3つの物語。</h1>
         <p class="lead">
-          日々、プロダクトの顔となるWebサイトやインタラクションをデザイン &amp; コーディングしています。今の技術だけでなく、未来を見据えた体験の設計を得意としています。
+          高揚できるロマンス、予想を裏切るサスペンス、そして温かな人間模様。各局の注目作を深掘りしながら、次に観るべき1本が見つかるよう編集部のおすすめをまとめました。
         </p>
-        <div class="actions">
-          <button class="primary">制作実績を見る</button>
-          <button class="secondary">相談する</button>
-        </div>
       </section>
 
       <section class="grid">
         <article class="card">
-          <h3>アイデアの具現化</h3>
-          <p>スタートアップから個人プロジェクトまで、コンセプトから視覚化を経てプロダクト出荷まで伴走します。</p>
+          <h3>夜に煌めく誓い</h3>
+          <p>
+            小さな港町を舞台に、心を閉ざした凛子と消えた歌声の作曲家が再会。音楽と共に過去の謎が解き明かされていくラブミステリー。
+          </p>
+          <p class="tagline">Streaming: 毎週火曜 22:00 | NHK総合</p>
+          <div class="meta">
+            <span>ヒーリング系</span>
+            <span>全8話</span>
+            <span>脚本：山本恵里</span>
+          </div>
         </article>
         <article class="card">
-          <h3>フロントエンド開発</h3>
-          <p>React/Vueに加え、TailwindやMotionで直感的かつ高品質なUIを実装し、UXを損なわないパフォーマンス維持をしてきました。</p>
+          <h3>白昼の微光</h3>
+          <p>
+            大学院生の視点で描く法医学サスペンス。証拠の向こう側にある “真実の色” を追うたびに、事件のディテールと登場人物の心情が交錯する。
+          </p>
+          <p class="tagline">Broadcast: 毎週金曜 23:15 | カンテレ</p>
+          <div class="meta">
+            <span>サスペンス</span>
+            <span>新作</span>
+            <span>主演：中田雅人</span>
+          </div>
         </article>
         <article class="card">
-          <h3>クリエイティブパートナー</h3>
-          <p>チームやクライアントと密に連携し、言語を超えた共創を何より重視したスタイルです。</p>
+          <h3>灯りをつないで</h3>
+          <p>
+            郊外の古民家で偶然出会った3世代の姉妹たちが、手作りの灯りを通じて再び家族の絆を取り戻すヒューマンドラマ。
+          </p>
+          <p class="tagline">Streaming: Amazon Prime Video | 毎週水曜 配信</p>
+          <div class="meta">
+            <span>家族愛</span>
+            <span>心温まる</span>
+            <span>監督：堀田碧</span>
+          </div>
         </article>
       </section>
 
-      <section class="timeline">
-        <div class="step">
-          <p class="stat">12</p>
-          <h3>業界リードのチームでの経験</h3>
-          <p>国内外のブランドと連携し、大規模なサービスの設計〜実装を担い、UI/UXのベストプラクティスを磨いてきました。</p>
-        </div>
-        <div class="step">
-          <p class="stat">120+</p>
-          <h3>制作したプロジェクト</h3>
-          <p>コーポレートサイトからプロダクト管理ツールまで幅広く、デザインシステムとコンポーネント設計を運用しています。</p>
-        </div>
-        <div class="step">
-          <p class="stat">Worldwide</p>
-          <h3>クライアント・パートナー</h3>
-          <p>東京を拠点にしつつ、リモートで世界各地のチームと協力。プロジェクトの円滑な進行を支えるコミュニケーションを心がけています。</p>
-        </div>
+      <section class="highlight">
+        <h2>今月の注目ポイント</h2>
+        <ul>
+          <li>リピート必至の劇中歌や背景の描写をチェック。毎週の更新が待ち遠しくなるように、音楽と映像美が融合した演出が見どころです。</li>
+          <li>一話完結ではなく、長期戦で感情のグラデーションを楽しめる配信スケジュール。週の中盤にドラマを観て、次の週に向けて想像を広げましょう。</li>
+          <li>ポッドキャスト「ドラマとコーヒー」では、ライブ配信で各回の見どころや伏線を解説。感想をつぶやくハッシュタグ「#今月の灯り」で参加可能です。</li>
+        </ul>
       </section>
 
-      <section class="grid" style="margin-top: 3rem;">
-        <article class="card">
-          <h3>Tell Me More</h3>
-          <p>新規サイト立ち上げ、ブランド刷新、サービスのスケーリングなど、あらゆるステージでクリエイティブパートナーをお探しならこちらから。</p>
-        </article>
-        <article class="card">
-          <h3>Contact</h3>
-          <p><strong>mail@example.com</strong><br />お気軽にご相談ください。週内のご返信を心がけています。</p>
-        </article>
-      </section>
-
-      <footer>Ⓒ 2024 Your Name — Crafted with care in Tokyo.</footer>
+      <footer>Ⓒ 2024 Drama Picks — 制作：AIC編集部</footer>
     </main>
   </body>
 </html>
