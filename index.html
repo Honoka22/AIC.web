@@ -109,6 +109,12 @@
         color: #cbd5f5;
       }
 
+      .tagline {
+        margin: 0.35rem 0 0;
+        font-weight: 600;
+        color: #38bdf8;
+      }
+
       .card img {
         width: 100%;
         border-radius: 0.85rem;
@@ -190,58 +196,106 @@
         </p>
       </section>
 
-      <section class="grid">
-        <article class="card">
-          <h3>ワンピース（実写版）</h3>
-          <p>
-            アメリカの制作陣が海賊の冒険に新しいリアリズムを注入。原作の熱量を再現しつつ、ビジュアルの質感やキャラクターの距離感に現代ドラマらしい厚みがあります。
-          </p>
-          <p class="tagline">冒険×友情 | 海外ドラマ | 配信：Netflix</p>
-          <div class="meta">
-            <span>アクション満載</span>
-            <span>配役のバランス◎</span>
-            <span>原作ファンにもおすすめ</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <img src="my-demon.webp" alt="マイデーモンのキービジュアル" />
-          <h3>マイデーモン</h3>
-          <p>
-            韓国ドラマらしい感情の揺さぶりとファンタジックな世界観を併せ持つ作品。「悪魔」と契約したヒロインが私欲と向き合うなかで、優しさと自立が丁寧に描かれます。
-          </p>
-          <p class="tagline">ロマンス×ファンタジー | 韓国ドラマ | 配信：Netflix</p>
-          <div class="meta">
-            <span>感情の波が心地よい</span>
-            <span>OSTが染みる</span>
-            <span>スローながら癖になる</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>不適切にもほどがある</h3>
-          <p>
-            日本の地上波枠で放送される、ブラックユーモアとサスペンスが交差する傑作。特殊な状況に置かれた登場人物たちの心理戦や、日常のタッチの強弱が小気味よく響きます。
-          </p>
-          <p class="tagline">ブラックコメディ | 日本のドラマ | 放送：TBS</p>
-          <div class="meta">
-            <span>台詞回しが秀逸</span>
-            <span>目が離せない展開</span>
-            <span>今季の話題作</span>
-          </div>
-        </article>
-      </section>
+      <section class="grid" id="recommendations"></section>
 
       <h2 class="section-title">いつ観る？視聴のヒント</h2>
       <div class="tips">
-        <ul>
-          <li>冒頭は一気に流し見せず、演出やロケ地のカットをじっくり眺めると新たな発見があります。</li>
-          <li>サブキャラの小さな仕草にも注目すると、作品のテーマがより深く染み渡ります。</li>
-          <li>観終えたらお気に入りの一場面を手帳に書き起こし、次の推しポイントへつなげてください。</li>
-        </ul>
+        <ul id="tips-list"></ul>
       </div>
 
       <footer>Ⓒ 2024 AIC Recommender — 映画とドラマを愛するひととき</footer>
     </main>
+    <script>
+      const recommendations = [
+        {
+          title: "ワンピース（実写版）",
+          description:
+            "アメリカの制作陣が海賊の冒険に新しいリアリズムを注入。原作の熱量を再現しつつ、ビジュアルの質感やキャラクターの距離感に現代ドラマらしい厚みがあります。",
+          tagline: "冒険×友情 | 海外ドラマ | 配信：Netflix",
+          meta: ["アクション満載", "配役のバランス◎", "原作ファンにもおすすめ"],
+        },
+        {
+          title: "マイデーモン",
+          description:
+            "韓国ドラマらしい感情の揺さぶりとファンタジックな世界観を併せ持つ作品。「悪魔」と契約したヒロインが私欲と向き合うなかで、優しさと自立が丁寧に描かれます。",
+          tagline: "ロマンス×ファンタジー | 韓国ドラマ | 配信：Netflix",
+          meta: ["感情の波が心地よい", "OSTが染みる", "スローながら癖になる"],
+          image: "my-demon.webp",
+          imageAlt: "マイデーモンのキービジュアル",
+        },
+        {
+          title: "不適切にもほどがある",
+          description:
+            "日本の地上波枠で放送される、ブラックユーモアとサスペンスが交差する傑作。特殊な状況に置かれた登場人物たちの心理戦や、日常のタッチの強弱が小気味よく響きます。",
+          tagline: "ブラックコメディ | 日本のドラマ | 放送：TBS",
+          meta: ["台詞回しが秀逸", "目が離せない展開", "今季の話題作"],
+        },
+      ];
+
+      const tips = [
+        "冒頭は一気に流し見せず、演出やロケ地のカットをじっくり眺めると新たな発見があります。",
+        "サブキャラの小さな仕草にも注目すると、作品のテーマがより深く染み渡ります。",
+        "観終えたらお気に入りの一場面を手帳に書き起こし、次の推しポイントへつなげてください。",
+      ];
+
+      const buildMeta = (container, items) => {
+        items.forEach((text) => {
+          const span = document.createElement("span");
+          span.textContent = text;
+          container.appendChild(span);
+        });
+      };
+
+      const renderRecommendations = () => {
+        const target = document.getElementById("recommendations");
+        if (!target) return;
+        recommendations.forEach((item) => {
+          const article = document.createElement("article");
+          article.className = "card";
+          if (item.image) {
+            const img = document.createElement("img");
+            img.src = item.image;
+            img.alt = item.imageAlt || item.title;
+            article.appendChild(img);
+          }
+          const title = document.createElement("h3");
+          title.textContent = item.title;
+          article.appendChild(title);
+
+          const desc = document.createElement("p");
+          desc.textContent = item.description;
+          article.appendChild(desc);
+
+          if (item.tagline) {
+            const tagline = document.createElement("p");
+            tagline.className = "tagline";
+            tagline.textContent = item.tagline;
+            article.appendChild(tagline);
+          }
+
+          const metaWrap = document.createElement("div");
+          metaWrap.className = "meta";
+          buildMeta(metaWrap, item.meta);
+          article.appendChild(metaWrap);
+
+          target.appendChild(article);
+        });
+      };
+
+      const renderTips = () => {
+        const list = document.getElementById("tips-list");
+        if (!list) return;
+        tips.forEach((tip) => {
+          const li = document.createElement("li");
+          li.textContent = tip;
+          list.appendChild(li);
+        });
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        renderRecommendations();
+        renderTips();
+      });
+    </script>
   </body>
 </html>
